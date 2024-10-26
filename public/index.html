@@ -9,35 +9,139 @@
       name="description"
       content="Web site created using create-react-app"
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    <title>Shadow Strike</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+    </style>
   </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+  <body style="background-color: #282c34;">
+    <!-- <div style="position: relative;">
+    <div 
+    style="
+    position:absolute;
+    display: flex;
+    width: 100%; 
+    align-items: center;
+    padding: 20px"> -->
+    <!-- player1 health -->
+      <!-- <div id="yellow-div" style=" background-color: yellow; height: 60px; width: 90%"></div> -->
+      <!-- timer -->
+      <!-- <div id="timer" style="background-color: red; height: 150px; width: 150px; flex-shrink: 0;"></div> -->
+      <!-- player2 health -->
+       <!-- <div></div>
+      <div style="position: relative; height: 60px; width: 100%"></div>
+      <div id="yellow-div2" style="background-color: yellow; height: 60px;"></div>
+      <div style="position: absolute; background:blue"></div>
+      <div></div> -->
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    <!-- </div>
+    </div> -->
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <div style="position: relative; display: inline-block; left:20px">
+      <!-- smaller red container div -->
+      <div
+        style="
+          position: absolute;
+          display: flex;
+          width: 100%;
+          align-items: center;
+          padding: 20px;
+        "
+      >
+        <!-- player health -->
+        <div
+          style="
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            border-top: 4px solid white;
+            border-left: 4px solid white;
+            border-bottom: 4px solid white;
+          "
+        >
+          <div style="background-color: red; height: 60px; width: 100%"></div>
+          <div
+            id="playerHealth"
+            style="
+              position: absolute;
+              background: blue;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              width: 100%;
+            "
+          ></div>
+        </div>
+  
+        <!-- timer -->
+        <div
+          id="timer"
+          style="
+            font-size: 30px;
+            background-color: black;
+            width: 120px;
+            height: 120px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border: 4px solid white;
+          "
+        >
+          100
+        </div>
+        <!-- enemy health -->
+        <div
+          style="
+            position: relative;
+            width: 100%;
+            border-top: 4px solid white;
+            border-bottom: 4px solid white;
+            border-right: 4px solid white;
+          "
+        >
+          <div style="background-color: red; height: 60px"></div>
+          <div
+            id="enemyHealth"
+            style="
+              position: absolute;
+              background: blue;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+            "
+          ></div>
+        </div>
+        <div></div>
+      </div>
+      <div
+      id="displayText"
+      style="
+        font-size: 62px;
+        position: absolute;
+        color: white;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(0,0,0,0);
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: none;
+      "
+    >
+      Tie
+    </div>
+    <canvas></canvas>
+  </div>
+    <div id="root">
+      
+    <!-- <canvas class="canvas"></canvas> -->
+    </div>
   </body>
 </html>
