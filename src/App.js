@@ -510,6 +510,7 @@ function App() {
         player.isAttacking = false
         console.log("wao")
         enemy.takeHit(10)
+        document.querySelector(".enemyHP").style.transition = "width 0.2s" 
         document.querySelector(".enemyHP").style.width = enemy.health + '%'
     
       }
@@ -531,6 +532,7 @@ function App() {
       enemy.isAttacking = false
       console.log("dem")
       player.takeHit(5)
+      document.querySelector(".playerHP").style.transition = "width 0.2s"
       document.querySelector(".playerHP").style.width = player.health + '%'
     }
 
