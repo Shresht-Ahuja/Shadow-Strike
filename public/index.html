@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -17,27 +19,6 @@
     </style>
   </head>
   <body style="background-color: #282c34;">
-    <!-- <div style="position: relative;">
-    <div 
-    style="
-    position:absolute;
-    display: flex;
-    width: 100%; 
-    align-items: center;
-    padding: 20px"> -->
-    <!-- player1 health -->
-      <!-- <div id="yellow-div" style=" background-color: yellow; height: 60px; width: 90%"></div> -->
-      <!-- timer -->
-      <!-- <div id="timer" style="background-color: red; height: 150px; width: 150px; flex-shrink: 0;"></div> -->
-      <!-- player2 health -->
-       <!-- <div></div>
-      <div style="position: relative; height: 60px; width: 100%"></div>
-      <div id="yellow-div2" style="background-color: yellow; height: 60px;"></div>
-      <div style="position: absolute; background:blue"></div>
-      <div></div> -->
-
-    <!-- </div>
-    </div> -->
 
     <div style="position: relative; display: inline-block; left:20px">
       <!-- smaller red container div -->
@@ -64,33 +45,13 @@
         >
           <div style="background-color: red; height: 60px; width: 100%"></div>
           <div
-            id="playerHealth"
-            style="
-              position: absolute;
-              background: blue;
-              top: 0;
-              right: 0;
-              bottom: 0;
-              width: 100%;
-            "
+            class="playerHP"
           ></div>
         </div>
   
         <!-- timer -->
         <div
-          id="timer"
-          style="
-            font-size: 30px;
-            background-color: black;
-            width: 120px;
-            height: 120px;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            border: 4px solid white;
-          "
+          class="timer"
         >
           100
         </div>
@@ -106,34 +67,14 @@
         >
           <div style="background-color: red; height: 60px"></div>
           <div
-            id="enemyHealth"
-            style="
-              position: absolute;
-              background: blue;
-              top: 0;
-              right: 0;
-              bottom: 0;
-              left: 0;
-            "
+            class="enemyHP"
           ></div>
         </div>
         <div></div>
       </div>
       <div
-      id="displayText"
-      style="
-        font-size: 62px;
-        position: absolute;
-        color: white;
-        align-items: center;
-        justify-content: center;
-        background-color: rgba(0,0,0,0);
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        display: none;
-      "
+      class="result"
+      
     >
       Tie
     </div>
