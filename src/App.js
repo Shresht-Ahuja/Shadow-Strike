@@ -549,7 +549,14 @@ function App() {
       // jumping
       if (player.velocity.y < 0) {
         player.switchSprite('jump')
-      } else if (player.velocity.y > 0) {
+      } 
+      else if(player.velocity.y < 0 && player.lastKey === 'a'){
+        player.switchSprite('jump_i')
+      }
+      else if (player.velocity.y > 0 && player.lastKey === 'a') {
+        player.switchSprite('fall_i')
+      }
+      else if (player.velocity.y > 0) {
         player.switchSprite('fall')
       }
 
