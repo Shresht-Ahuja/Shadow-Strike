@@ -163,7 +163,11 @@ function App() {
         if (this.health <= 0) {
             this.switchSprite('death')
         } else {
+          if(keys.a.pressed && player.lastKey === 'a'){
+            this.switchSprite('takeHit_i')
+          } else{
             this.switchSprite('takeHit')
+          }
         }
         setTimeout(() => {
             this.framesHold = rn_framesHold
@@ -282,6 +286,21 @@ function App() {
                       this.framesCurrent = 0
                     }
                     break
+                    case 'takeHit_i':
+                      if (this.image !== this.sprites.takeHit_i.image) {
+                        this.image = this.sprites.takeHit_i.image
+                        this.framesMax = this.sprites.takeHit_i.framesMax
+                        this.framesCurrent = 0
+                      }
+                      break
+              
+                    case 'death_i':
+                      if (this.image !== this.sprites.death_i.image) {
+                        this.image = this.sprites.death_i.image
+                        this.framesMax = this.sprites.death_i.framesMax
+                        this.framesCurrent = 0
+                      }
+                      break
           default:
         }
       }
@@ -442,7 +461,36 @@ function App() {
         death: {
           imageSrc: './images/player2/Death.png',
           framesMax: 7
-        }},
+        },
+        idle_i: {
+          imageSrc: './images/player2_inverted/Idle.png',
+          framesMax: 4
+        },
+        run_i: {
+          imageSrc: './images/player2_inverted/Run.png',
+          framesMax: 8
+        },
+        jump_i: {
+          imageSrc: './images/player2_inverted/Jump.png',
+          framesMax: 2
+        },
+        fall_i: {
+          imageSrc: './images/player2_inverted/Fall.png',
+          framesMax: 2
+        },
+        attack1_i: {
+          imageSrc: './images/player2_inverted/Attack1.png',
+          framesMax: 6
+        },
+        takeHit_i: {
+          imageSrc: './images/player2_inverted/Take_Hit.png',
+          framesMax: 4
+        },
+        death_i: {
+          imageSrc: './images/player2_inverted/Death.png',
+          framesMax: 6
+        }
+      },
         attackBox: {
           offset: {
             x: -330,
@@ -451,7 +499,7 @@ function App() {
         width: 330,
         height: 110
         },
-        framesHold: 8
+        framesHold: 10
     })
     
   
@@ -532,6 +580,7 @@ function App() {
       player.update();
       enemy.update();
 
+      //player movement
       if (keys.a.pressed && player.lastKey === 'a') {
         player.velocity.x = -5
         player.switchSprite('run_i')
@@ -550,21 +599,25 @@ function App() {
       if (player.velocity.y < 0) {
         player.switchSprite('jump')
       } 
-      else if(player.velocity.y < 0 && player.lastKey === 'a'){
+      else if(player.velocity.y < 0 && keys.a.pressed && player.lastKey === 'a'){
         player.switchSprite('jump_i')
       }
-      else if (player.velocity.y > 0 && player.lastKey === 'a') {
+      else if (player.velocity.y > 0 && keys.a.pressed && player.lastKey === 'a') {
         player.switchSprite('fall_i')
       }
       else if (player.velocity.y > 0) {
         player.switchSprite('fall')
       }
 
-      if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
-        enemy.velocity.x = -5
-        enemy.switchSprite('run')
-      } else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
+      // enemy movement
+      if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
         enemy.velocity.x = 5
+        enemy.switchSprite('run_i')
+      } else if(!keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight'){
+        enemy.switchSprite('idle_i')
+      } 
+      else if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
+        enemy.velocity.x = -5
         enemy.switchSprite('run')
       } else {
         enemy.switchSprite('idle')
@@ -573,7 +626,14 @@ function App() {
       // jumping
       if (enemy.velocity.y < 0) {
         enemy.switchSprite('jump')
-      } else if (enemy.velocity.y > 0) {
+      } 
+      else if(enemy.velocity.y < 0 && keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight'){
+        enemy.switchSprite('jump_i')
+      }
+      else if (enemy.velocity.y > 0 && keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
+        enemy.switchSprite('fall_i')
+      }
+      else if (enemy.velocity.y > 0) {
         enemy.switchSprite('fall')
       }
 
