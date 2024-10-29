@@ -421,6 +421,18 @@ function App() {
       }
     }
 
+    function invert(rect1, rect2){
+      return (
+        rect1.attackBox.position.x + rect1.attackBox.width >=
+          rect2.position.x &&
+        rect1.attackBox.position.x <=
+          rect2.position.x + rect2.width &&
+        rect1.attackBox.position.y + rect1.attackBox.height >=
+          rect2.position.y &&
+        rect1.attackBox.position.y <= rect2.position.y + rect2.height
+      )
+    }
+
     let timer = 101
     let timerId
     function decreaseTimer(){
@@ -536,6 +548,10 @@ function App() {
       document.querySelector(".playerHP").style.width = player.health + '%'
     }
 
+    if(invert(player, enemy)){
+      
+    }
+
     // if player2 misses
     if (enemy.isAttacking && enemy.framesCurrent === 2) {
       enemy.isAttacking = false
@@ -555,6 +571,7 @@ function App() {
 
     window.addEventListener('keydown', (event) => {
       if (!player.dead) {
+        if(event.repeat) return;
 
       switch (event.key) {
           case 'd':
@@ -575,6 +592,7 @@ function App() {
       }
     }
       if (!enemy.dead) {
+        if(event.repeat) return;
 
         switch (event.key) {
             case 'ArrowRight':
