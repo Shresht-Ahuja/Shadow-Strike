@@ -245,12 +245,49 @@ function App() {
               this.framesCurrent = 0
             }
             break
+
+          case 'idle_i':
+            if (this.image !== this.sprites.idle_i.image) {
+              this.image = this.sprites.idle_i.image
+              this.framesMax = this.sprites.idle_i.framesMax
+              this.framesCurrent = 0
+            }
+            break
+          case 'run_i':
+            if (this.image !== this.sprites.run_i.image) {
+              this.image = this.sprites.run_i.image
+              this.framesMax = this.sprites.run_i.framesMax
+              this.framesCurrent = 0
+            }
+              break
+
+              case 'jump_i':
+                if (this.image !== this.sprites.jump_i.image) {
+                  this.image = this.sprites.jump_i.image
+                  this.framesMax = this.sprites.jump_i.framesMax
+                  this.framesCurrent = 0
+                }
+                break
+                case 'fall_i':
+                  if (this.image !== this.sprites.fall_i.image) {
+                    this.image = this.sprites.fall_i.image
+                    this.framesMax = this.sprites.fall_i.framesMax
+                    this.framesCurrent = 0
+                  }
+                  break
+                  case 'attack1_i':
+                    if (this.image !== this.sprites.attack1_i.image) {
+                      this.image = this.sprites.attack1_i.image
+                      this.framesMax = this.sprites.attack1_i.framesMax
+                      this.framesCurrent = 0
+                    }
+                    break
           default:
         }
       }
     }
     
-    
+
     const background = new Sprite({
       position: {
         x: 0,
@@ -315,7 +352,37 @@ function App() {
         death: {
           imageSrc: './images/player1/Death.png',
           framesMax: 6
-        }},
+        },
+
+        idle_i: {
+          imageSrc: './images/player1_inverted/Idle.png',
+          framesMax: 8
+        },
+        run_i: {
+          imageSrc: './images/player1_inverted/Run.png',
+          framesMax: 8
+        },
+        jump_i: {
+          imageSrc: './images/player1_inverted/Jump.png',
+          framesMax: 2
+        },
+        fall_i: {
+          imageSrc: './images/player1_inverted/Fall.png',
+          framesMax: 2
+        },
+        attack1_i: {
+          imageSrc: './images/player1_inverted/Attack1.png',
+          framesMax: 6
+        },
+        takeHit_i: {
+          imageSrc: './images/player1_inverted/Take Hit - white silhouette.png',
+          framesMax: 4
+        },
+        death_i: {
+          imageSrc: './images/player1_inverted/Death.png',
+          framesMax: 6
+        }
+      },
         attackBox: {
           offset: {
             x: 100,
@@ -386,6 +453,7 @@ function App() {
         },
         framesHold: 8
     })
+    
   
     function rectangularCollision({ rect1, rect2 }) {
       return (
@@ -419,18 +487,6 @@ function App() {
         player.switchSprite('death')
         enemy.win = true
       }
-    }
-
-    function invert(rect1, rect2){
-      return (
-        rect1.attackBox.position.x + rect1.attackBox.width >=
-          rect2.position.x &&
-        rect1.attackBox.position.x <=
-          rect2.position.x + rect2.width &&
-        rect1.attackBox.position.y + rect1.attackBox.height >=
-          rect2.position.y &&
-        rect1.attackBox.position.y <= rect2.position.y + rect2.height
-      )
     }
 
     let timer = 101
@@ -478,13 +534,17 @@ function App() {
 
       if (keys.a.pressed && player.lastKey === 'a') {
         player.velocity.x = -5
-        player.switchSprite('run')
-      } else if (keys.d.pressed && player.lastKey === 'd') {
+        player.switchSprite('run_i')
+      }
+      else if(!keys.a.pressed && player.lastKey === 'a'){
+        player.switchSprite('idle_i')
+      }
+      else if (keys.d.pressed && player.lastKey === 'd') {
         player.velocity.x = 5
         player.switchSprite('run')
       } else {
-        player.switchSprite('idle')
-      }
+         player.switchSprite('idle')
+       }
     
       // jumping
       if (player.velocity.y < 0) {
@@ -521,7 +581,7 @@ function App() {
       ) {
         player.isAttacking = false
         console.log("wao")
-        enemy.takeHit(10)
+        enemy.takeHit(5)
         document.querySelector(".enemyHP").style.transition = "width 0.2s" 
         document.querySelector(".enemyHP").style.width = enemy.health + '%'
     
@@ -548,10 +608,6 @@ function App() {
       document.querySelector(".playerHP").style.width = player.health + '%'
     }
 
-    if(invert(player, enemy)){
-      
-    }
-
     // if player2 misses
     if (enemy.isAttacking && enemy.framesCurrent === 2) {
       enemy.isAttacking = false
@@ -561,7 +617,6 @@ function App() {
       determineWinner({player, enemy, timerId})
     }
   }
-  
     animate();
 
 
@@ -619,10 +674,12 @@ function App() {
         case 'd':
             keys.d.pressed = false
             player.velocity.x = 0;
+            player.switchSprite('idle')
             break
         case 'a':
             keys.a.pressed = false
             player.velocity.x = 0;
+            player.switchSprite('idle_i')
             break
         case 'w':
           player.velocity.y = 0;
