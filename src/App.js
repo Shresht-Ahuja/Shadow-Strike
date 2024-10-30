@@ -84,6 +84,7 @@ function App() {
         offset = { x: 0, y: 0 },
         sprites,
         attackBox = { offset: {}, width: undefined, height: undefined },
+        attackBox_i = { offset: {}, width: undefined, height: undefined },
         framesHold = 5
       }) {
         super({
@@ -106,6 +107,15 @@ function App() {
           offset: attackBox.offset,
           width: attackBox.width,
           height: attackBox.height
+        }
+        this.attackBox_i = {
+          position: {
+            x: this.position.x,
+            y: this.position.y
+          },
+          offset: attackBox_i.offset,
+          width: attackBox_i.width,
+          height: attackBox_i.height
         }
         this.color = color
         this.isAttacking = false
@@ -130,6 +140,9 @@ function App() {
         // attack boxes
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x
         this.attackBox.position.y = this.position.y + this.attackBox.offset.y
+
+        this.attackBox_i.position.x = this.position.x + this.attackBox_i.offset.x
+        this.attackBox_i.position.y = this.position.y + this.attackBox_i.offset.y
     
         // draw the attack box
         // c.fillRect(
@@ -137,6 +150,15 @@ function App() {
         //   this.attackBox.position.y,
         //   this.attackBox.width,
         //   this.attackBox.height
+        // )
+        // c.fillStyle = 'black';
+        // c.resetTransform();
+
+        // c.fillRect(
+        //   this.attackBox_i.position.x,
+        //   this.attackBox_i.position.y,
+        //   this.attackBox_i.width,
+        //   this.attackBox_i.height
         // )
         // c.fillStyle = 'black';
         // c.resetTransform();
@@ -152,7 +174,12 @@ function App() {
       }
     
       attack() {
+        if(this.lastKey === 'a' || this.lastKey === 'ArrowRight'){
+          this.switchSprite('attack1_i')
+        }
+        else{
         this.switchSprite('attack1')
+        }
         this.isAttacking = true
       }
     
@@ -162,13 +189,9 @@ function App() {
         this.framesHold = 12
         if (this.health <= 0) {
             this.switchSprite('death')
-        } else {
-          if(keys.a.pressed && player.lastKey === 'a'){
-            this.switchSprite('takeHit_i')
-          } else{
+        } else{
             this.switchSprite('takeHit')
           }
-        }
         setTimeout(() => {
             this.framesHold = rn_framesHold
         }, 1000)
@@ -187,6 +210,11 @@ function App() {
           this.framesCurrent < this.sprites.attack1.framesMax - 1
         )
           return
+          if (
+            this.image === this.sprites.attack1_i.image &&
+            this.framesCurrent < this.sprites.attack1_i.framesMax - 1
+          )
+            return
     
         // override when fighter gets hit
         if (
@@ -410,7 +438,15 @@ function App() {
           width: 340,
           height: 100
         },
-        framesHold: 10
+        attackBox_i: {
+          offset: {
+            x: -340,
+            y: 50
+          },
+          width: 340,
+          height: 100
+        },
+        framesHold: 6
     });
 
     const enemy = new Fighter({
@@ -422,10 +458,7 @@ function App() {
         x: 0,
         y: 0
       },
-      // offset: {
-      //   x: -50,
-      //   y: 0
-      // },
+      // offset: { x: -50, y: 0},
       imageSrc: './images/player2/Idle.png',
       framesMax: 4,
       scale: 5,
@@ -480,7 +513,7 @@ function App() {
         },
         attack1_i: {
           imageSrc: './images/player2_inverted/Attack1.png',
-          framesMax: 6
+          framesMax: 4
         },
         takeHit_i: {
           imageSrc: './images/player2_inverted/Take_Hit.png',
@@ -499,20 +532,30 @@ function App() {
         width: 330,
         height: 110
         },
-        framesHold: 10
+        attackBox_i: {
+          offset: {
+            x: 100,
+            y: 110
+          },
+          width: 330,
+          height: 110
+        },
+        framesHold: 6
     })
     
   
     function rectangularCollision({ rect1, rect2 }) {
+      // which attack box to use
+      const attackBox = (rect1.lastKey === 'a' || rect1.lastKey === 'ArrowRight')
+        ? rect1.attackBox_i
+        : rect1.attackBox;
+    
       return (
-        rect1.attackBox.position.x + rect1.attackBox.width >=
-          rect2.position.x &&
-        rect1.attackBox.position.x <=
-          rect2.position.x + rect2.width &&
-        rect1.attackBox.position.y + rect1.attackBox.height >=
-          rect2.position.y &&
-        rect1.attackBox.position.y <= rect2.position.y + rect2.height
-      )
+        attackBox.position.x + attackBox.width >= rect2.position.x &&
+        attackBox.position.x <= rect2.position.x + rect2.width &&
+        attackBox.position.y + attackBox.height >= rect2.position.y &&
+        attackBox.position.y <= rect2.position.y + rect2.height
+      );
     }
 
     function determineWinner({player,enemy,timerId}){
@@ -580,7 +623,7 @@ function App() {
       player.update();
       enemy.update();
 
-      //player movement
+      //player1 movement
       if (keys.a.pressed && player.lastKey === 'a') {
         player.velocity.x = -5
         player.switchSprite('run_i')
@@ -595,7 +638,7 @@ function App() {
          player.switchSprite('idle')
        }
     
-      // jumping
+      // jumping for player1
       if (player.velocity.y < 0) {
         player.switchSprite('jump')
       } 
@@ -609,7 +652,7 @@ function App() {
         player.switchSprite('fall')
       }
 
-      // enemy movement
+      // player2 movement
       if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
         enemy.velocity.x = 5
         enemy.switchSprite('run_i')
@@ -623,7 +666,7 @@ function App() {
         enemy.switchSprite('idle')
       }
     
-      // jumping
+      // jumping for player2
       if (enemy.velocity.y < 0) {
         enemy.switchSprite('jump')
       } 
@@ -637,7 +680,7 @@ function App() {
         enemy.switchSprite('fall')
       }
 
-      //the detection for collision
+      //the detection for collision for player1
       if (
         rectangularCollision({
           rect1: player,
@@ -660,7 +703,7 @@ function App() {
       player.isAttacking = false
     }
 
-
+      //the detection for collision for player2
       if(rectangularCollision({
         rect1: enemy,
         rect2: player
@@ -680,6 +723,7 @@ function App() {
       enemy.isAttacking = false
     }
 
+    // if one of the player dies
     if(enemy.health <= 0 || player.health <= 0){
       determineWinner({player, enemy, timerId})
     }
@@ -694,7 +738,6 @@ function App() {
     window.addEventListener('keydown', (event) => {
       if (!player.dead) {
         if(event.repeat) return;
-
       switch (event.key) {
           case 'd':
             keys.d.pressed = true
