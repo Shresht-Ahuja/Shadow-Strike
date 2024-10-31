@@ -2,6 +2,12 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Controls
+# Player 1 
+WASD for movement and Space bar for Attack
+# Player 2
+ArrowUp, ArrowLeft, ArrowRight for movement and ArrowDown for Attack
+
 ## Available Scripts
 
 In the project directory, you can run:
