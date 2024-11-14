@@ -176,7 +176,7 @@ function App() {
       attack() {
         if(this.lastKey === 'a' || this.lastKey === 'ArrowRight'){
           this.switchSprite('attack1_i')
-        }
+        } 
         else{
         this.switchSprite('attack1')
         }
@@ -340,23 +340,23 @@ function App() {
         x: 0,
         y: 0
       },
-      imageSrc: './images/background2.png',
+      imageSrc: './images/bg.jpg',
       width: 2200,
       height: 1000,
       scale: 1,
     })
 
-    const shop = new Sprite({
-      position: {
-        x: 1400,
-        y: 255
-      },
-      imageSrc: './images/shop.png',
-      width: 1000,
-      height: 200,
-      scale: 4.5,
-      framesMax: 6,
-    })
+    // const shop = new Sprite({
+    //   position: {
+    //     x: 1400,
+    //     y: 255
+    //   },
+    //   imageSrc: './images/shop.png',
+    //   width: 1000,
+    //   height: 200,
+    //   scale: 4.5,
+    //   framesMax: 6,
+    // })
 
     //const space = (window.innerWidth - 200) / 2
 
@@ -561,6 +561,7 @@ function App() {
     function determineWinner({player,enemy,timerId}){
       clearTimeout(timerId)
       document.querySelector(".result").style.display = "flex"
+      document.querySelector(".replay").style.display = "flex"
       if(player.health === enemy.health){
         document.querySelector(".result").innerHTML = "Tie"
         document.querySelector(".result").style.right = 1000
@@ -617,7 +618,7 @@ function App() {
       c.fillStyle = 'black';
       c.fillRect(0, 0, canvas.width, canvas.height);
       background.update();
-      shop.update();
+      //shop.update();
       c.fillStyle = 'rgba(255, 255, 255, 0.15)'
       c.fillRect(0, 0, canvas.width, canvas.height)
       player.update();
@@ -691,7 +692,7 @@ function App() {
       ) {
         player.isAttacking = false
         console.log("wao")
-        enemy.takeHit(5)
+        enemy.takeHit(10)
         document.querySelector(".enemyHP").style.transition = "width 0.2s" 
         document.querySelector(".enemyHP").style.width = enemy.health + '%'
     

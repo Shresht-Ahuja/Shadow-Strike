@@ -1,3 +1,7 @@
+* {
+  image-rendering: pixelated;
+}
+
 div {
   background-color: #282c34;
   color: white;
@@ -59,9 +63,34 @@ body {
   color: whitesmoke;
   align-items: center;
   justify-content: center;
-  top: 460px;
+  top: 340px;
   right: 760px;
-  bottom: 440px;
+  bottom: 520px;
   left: 760px;
   display: none;
+}
+.replay{
+  position: absolute;
+  align-items: center;
+  border-style: solid;
+  border-color: #282c34;
+  border-radius: 20px;
+  justify-content: center;
+  width: 350px;
+  height: 350px;
+  top: 500px;
+  right: 1400px;
+  bottom: 350px;
+  left: 950px;
+  display: none;
+}
+.replay_btn{
+  height: 350px;
+  width: 350px;
+  background: none;
+}
+.btn_img{
+  height: 350px;
+  width: 350px;
+  background: none;
 }
