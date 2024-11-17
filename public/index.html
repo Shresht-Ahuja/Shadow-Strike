@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
@@ -11,82 +8,28 @@
       name="description"
       content="Web site created using create-react-app"
     />
-    <title>Shadow Strike</title>
-    <style>
-      * {
-        box-sizing: border-box;
-      }
-    </style>
-  </head>
-  <body style="background-color: #282c34;">
 
-    <div style="position: relative; display: inline-block; left:20px">
-      <!-- smaller red container div -->
-      <div
-        style="
-          position: absolute;
-          display: flex;
-          width: 100%;
-          align-items: center;
-          padding: 20px;
-        "
-      >
-        <!-- player health -->
-        <div
-          style="
-            position: relative;
-            width: 100%;
-            display: flex;
-            justify-content: flex-end;
-            border-top: 4px solid white;
-            border-left: 4px solid white;
-            border-bottom: 4px solid white;
-          "
-        >
-          <div style="background-color: red; height: 60px; width: 100%"></div>
-          <div
-            class="playerHP"
-          ></div>
-        </div>
-  
-        <!-- timer -->
-        <div
-          class="timer"
-        >
-          100
-        </div>
-        <!-- enemy health -->
-        <div
-          style="
-            position: relative;
-            width: 100%;
-            border-top: 4px solid white;
-            border-bottom: 4px solid white;
-            border-right: 4px solid white;
-          "
-        >
-          <div style="background-color: red; height: 60px"></div>
-          <div
-            class="enemyHP"
-          ></div>
-        </div>
-        <div></div>
-      </div>
-      <div
-      class="result"
-      
-    >
-      Tie
-    </div>
-    <canvas></canvas>
-    
-  </div>
-  <div class="replay">
-    <button class="replay_btn" onClick="window.location.reload();"><img class="btn_img" src="./images/replay.png"/></button>
-    </div>
-    <div id="root">
-      
-    <!-- <canvas class="canvas"></canvas> -->
-    </div>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Shadow Strike</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root" class="canvas"></div>
   </body>
 </html>
+<!--
+            This HTML file is a template.
+            If you open it directly in the browser, you will see an empty page.
+
+            You can add webfonts, meta tags, or analytics to this file.
+            The build step will place the bundled scripts into the <body> tag.
+
+            To begin the development, run `npm start` or `yarn start`.
+            To create a production bundle, use `npm run build` or `yarn build`.
+        -->   

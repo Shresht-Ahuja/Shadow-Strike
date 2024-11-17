@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import './App.css';
+import ImportantContent from './imported_html';
+import './imported_html.css';
 
 function App() {
   useEffect(() => {
@@ -827,9 +829,9 @@ function App() {
   //   window.addEventListener('resize', handleResize);
    }, []);
 
-  return (
-    <div className="App">
-      <canvas></canvas>
+   return (
+    <div className='App'>
+      <ImportantContent />
     </div>
   );
 }
